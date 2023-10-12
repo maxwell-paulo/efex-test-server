@@ -15,21 +15,15 @@ const registerUser = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email } = req.body;
 
   try {
-    if (!email || !password) {
-      return res
-        .status(400)
-        .json({ message: "Email and/or password not provided." });
-    }
-
     const user = await findUserByEmail(email);
 
     if (!user) {
       return res
         .status(401)
-        .json({ mensagem: "E-mail e/ou senha inválido(s)." });
+        .json({ mensagem: "Invalid email and/or password." });
     }
 
     const { id } = user;
