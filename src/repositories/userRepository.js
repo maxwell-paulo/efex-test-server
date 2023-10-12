@@ -24,3 +24,12 @@ export const findUserByEmail = async (email) => {
 
   return result.rows[0];
 };
+
+export const findUserByID = async (id) => {
+  const query = `select id, name, email from users where id = $1`;
+
+  const params = [id];
+  const result = await pool.query(query, params);
+
+  return result.rows[0];
+};
