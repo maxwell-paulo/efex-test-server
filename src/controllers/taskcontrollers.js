@@ -10,6 +10,7 @@ const createTask = async (req, res) => {
       name,
       description: descriptionValue,
       user_id,
+      done: false,
     });
 
     return res.status(201).json(newTask);
