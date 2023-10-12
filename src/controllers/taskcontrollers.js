@@ -1,4 +1,4 @@
-import { createdTask } from "../repositories/taskRepository.js";
+import { createdTask, userTasks } from "../repositories/taskRepository.js";
 
 const createTask = async (req, res) => {
   const { name, description } = req.body;
@@ -19,4 +19,16 @@ const createTask = async (req, res) => {
   }
 };
 
-export { createTask };
+const listTasks = async (req, res) => {
+  const user_id = req.user.id;
+
+  try {
+    const allUserTasks = await userTasks(user_id);
+
+    return res.status(201).json(allUserTasks);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export { createTask, listTasks };
