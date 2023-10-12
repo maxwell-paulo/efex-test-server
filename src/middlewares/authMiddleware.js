@@ -10,7 +10,7 @@ export const validateLoginData = async (req, res, next) => {
   const isValidEncrypt = await checkEncrypt(userData?.password, password);
 
   if (!isValidEncrypt) {
-    return res.status(401).json({ message: "Acesso não autorizado." });
+    return res.status(401).json({ message: "Invalid email and/or password." });
   }
 
   next();
