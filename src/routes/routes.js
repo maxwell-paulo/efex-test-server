@@ -11,6 +11,7 @@ import {
   listTasks,
   isTaskDone,
   updateTask,
+  deleteTask,
 } from "../controllers/taskcontrollers.js";
 
 export const router = Router();
@@ -25,3 +26,4 @@ router.post("/task", createTask);
 router.get("/task", listTasks);
 router.patch("/task", isTaskDone);
 router.patch("/task/:id", updateTask);
+router.delete("/task/:id", deleteTask);

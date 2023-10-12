@@ -49,3 +49,12 @@ export const editedTask = async (taskData) => {
 
   return await pool.query(query, params);
 };
+
+export const deletedTask = async (taskId) => {
+  const query = `DELETE FROM tasks
+  WHERE id=$1;`;
+
+  const params = [taskId];
+
+  return await pool.query(query, params);
+};
