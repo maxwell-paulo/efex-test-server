@@ -34,3 +34,18 @@ export const isDone = async (taskId) => {
 
   return await pool.query(query, params);
 };
+
+export const editedTask = async (taskData) => {
+  const { name, description, id } = taskData;
+
+  const query = `UPDATE tasks
+  SET
+    name = COALESCE($1, name),
+    description = COALESCE($2, description)
+  WHERE id = $3;
+  `;
+
+  const params = [name, description, id];
+
+  return await pool.query(query, params);
+};
