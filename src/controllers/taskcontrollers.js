@@ -3,6 +3,7 @@ import {
   userTasks,
   isDone,
   editedTask,
+  deletedTask,
 } from "../repositories/taskRepository.js";
 
 const createTask = async (req, res) => {
@@ -69,4 +70,19 @@ const updateTask = async (req, res) => {
   }
 };
 
-export { createTask, listTasks, isTaskDone, updateTask };
+const deleteTask = async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (!id) {
+      return res.status(400).json("task id must be informed");
+    }
+
+    await deletedTask(id);
+
+    return res.status(201).json("Task deleted");
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export { createTask, listTasks, isTaskDone, updateTask, deleteTask };
