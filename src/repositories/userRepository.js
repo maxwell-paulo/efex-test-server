@@ -14,3 +14,13 @@ export const createdUser = async (userData) => {
 
   return newUser.rows[0];
 };
+
+export const findUserByEmail = async (email) => {
+  const query = `select * from users
+    where email = $1`;
+
+  const params = [email];
+  const result = await pool.query(query, params);
+
+  return result.rows[0];
+};
