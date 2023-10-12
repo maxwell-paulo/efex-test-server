@@ -6,7 +6,7 @@ import {
   validateToken,
 } from "../middlewares/authMiddleware.js";
 
-import { createTask } from "../controllers/taskcontrollers.js";
+import { createTask, listTasks } from "../controllers/taskcontrollers.js";
 
 export const router = Router();
 
@@ -17,3 +17,4 @@ router.post("/login", validateLoginData, login);
 router.use(validateToken);
 
 router.post("/task", createTask);
+router.get("/task", listTasks);
