@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { registerUser, login } from "../controllers/usercontrollers.js";
+import { registerUser, login } from "../controllers/userControllers.js";
 import { validateRegistration } from "../middlewares/validateRegistration.js";
 import {
   validateLoginData,
@@ -12,7 +12,7 @@ import {
   isTaskDone,
   updateTask,
   deleteTask,
-} from "../controllers/taskcontrollers.js";
+} from "../controllers/taskControllers.js";
 
 export const router = Router();
 
