@@ -15,9 +15,7 @@ export const createdTask = async (taskData) => {
 };
 
 export const userTasks = async (userId) => {
-  const { user_id } = userId;
-
-  const query = `SELECT name, description, done FROM tasks
+  const query = `SELECT id, name, description, done FROM tasks
   WHERE user_id = $1;`;
 
   const params = [userId];
@@ -25,4 +23,14 @@ export const userTasks = async (userId) => {
   const tasks = await pool.query(query, params);
 
   return tasks.rows;
+};
+
+export const isDone = async (taskId) => {
+  const query = `UPDATE tasks
+  SET done = NOT done
+  WHERE id = $1;`;
+
+  const params = [taskId];
+
+  return await pool.query(query, params);
 };

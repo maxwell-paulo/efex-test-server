@@ -1,4 +1,8 @@
-import { createdTask, userTasks } from "../repositories/taskRepository.js";
+import {
+  createdTask,
+  userTasks,
+  isDone,
+} from "../repositories/taskRepository.js";
 
 const createTask = async (req, res) => {
   const { name, description } = req.body;
@@ -31,4 +35,20 @@ const listTasks = async (req, res) => {
   }
 };
 
-export { createTask, listTasks };
+const isTaskDone = async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    if (!id) {
+      return res.status(400).json("task id must be informed");
+    }
+
+    await isDone(id);
+
+    return res.status(201).json("Task updated");
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export { createTask, listTasks, isTaskDone };
