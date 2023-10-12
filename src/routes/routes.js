@@ -10,6 +10,7 @@ import {
   createTask,
   listTasks,
   isTaskDone,
+  updateTask,
 } from "../controllers/taskcontrollers.js";
 
 export const router = Router();
@@ -23,3 +24,4 @@ router.use(validateToken);
 router.post("/task", createTask);
 router.get("/task", listTasks);
 router.patch("/task", isTaskDone);
+router.patch("/task/:id", updateTask);

@@ -2,6 +2,7 @@ import {
   createdTask,
   userTasks,
   isDone,
+  editedTask,
 } from "../repositories/taskRepository.js";
 
 const createTask = async (req, res) => {
@@ -51,4 +52,21 @@ const isTaskDone = async (req, res) => {
   }
 };
 
-export { createTask, listTasks, isTaskDone };
+const updateTask = async (req, res) => {
+  const { name, description } = req.body;
+  const { id } = req.params;
+
+  try {
+    if (!name && !description) {
+      return res.status(400).json("task name or description must be informed");
+    }
+
+    await editedTask({ name, description, id });
+
+    return res.status(201).json("Task updated");
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export { createTask, listTasks, isTaskDone, updateTask };
