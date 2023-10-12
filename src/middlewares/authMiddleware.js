@@ -2,7 +2,28 @@ import {
   checkEncrypt,
   validateAndGetTokenData,
 } from "../utils/encryptPassword.js";
-import { findUserByEmail } from "../repositories/userRepository.js";
+import {
+  findUserByEmail,
+  findUserByID,
+} from "../repositories/userRepository.js";
+
+export const validateToken = async (req, res, next) => {
+  const { authorization } = req.headers;
+  try {
+    const token = authorization?.split(" ")[1];
+
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized access." });
+    }
+
+    const { id } = validateAndGetTokenData(token);
+    req.user = await findUserByID(id);
+  } catch (error) {
+    return res.status(401).json({ message: error.message });
+  }
+
+  next();
+};
 
 export const validateLoginData = async (req, res, next) => {
   const { email, password } = req.body;
