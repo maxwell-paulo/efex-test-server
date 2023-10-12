@@ -9,5 +9,6 @@ CREATE TABLE tasks (
 	id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   description TEXT DEFAULT 'daily task',
-  user_id INTEGER REFERENCES users(id)
+  user_id INTEGER REFERENCES users(id),
+  done BOOLEAN DEFAULT false
 )
