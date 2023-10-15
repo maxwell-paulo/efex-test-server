@@ -2,9 +2,9 @@
   "name": "to-do-list-server",
   "version": "1.0.0",
   "description": "",
+  "main": "../to-do-list-server/src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node ./src/index.js",
     "dev": "nodemon ./src/server.js"
   },
   "keywords": [],
