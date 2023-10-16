@@ -40,7 +40,7 @@ SECRET_KEY=your_secret_key`
 
 To start the API, run the following command:
 
-`npm start`
+`npm run dev`
 
 The API will run on port 3000 by default. You can access it at `http://localhost:3000`.
 
